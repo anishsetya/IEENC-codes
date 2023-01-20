@@ -3,7 +3,7 @@
 using namespace std;
 bool isprime(int);
 bool iscprime(int);
-int reverse(int);
+int rotate(int,int);
 bool iscoprime(int , int);
 int main(){
     cout<<"enter a number"<<endl;
@@ -23,6 +23,7 @@ int main(){
         cout<<n<<" and "<<m<<" are coprime"<<endl;
     else
         cout<<n<<" and "<<m<<" are not coprime"<<endl;
+
     
 }
 bool iscoprime(int n, int m){
@@ -33,20 +34,20 @@ bool iscoprime(int n, int m){
     }
     return true;
 }
-int reverse(int n){
-    int x=0; 
-    while(n>0){
-        x=x*10+n%10;
-        n=n/10;
-    }
-    return x;
+int rotate(int n, int l){
+    int fdig=n/l; //first digit
+    int rot=(n%l)*10+fdig;
+    return rot;
 }
-
 bool iscprime(int n){
-    if(isprime(n) && isprime(reverse(n)))
-        return true;
-    else
-        return false; 
+    int nodig=log10(n);//casting to integer will give number of digits-1
+    int p=pow(10,nodig);
+    for(int i=0;i<nodig;i++){
+        if(!isprime(n))
+            return false;
+        n=rotate(n,p);
+    }
+    return true;
 }
 bool isprime(int n){
     for(int i=2;i<=sqrt(n);i++){//square root has less iterations than half of the number
