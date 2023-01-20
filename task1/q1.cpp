@@ -34,7 +34,7 @@ bool iscoprime(int n, int m){
     }
     return true;
 }
-int rotate(int n, int l){
+int rotate(int n, int l){//one single rotation
     int fdig=n/l; //first digit
     int rot=(n%l)*10+fdig;
     return rot;
